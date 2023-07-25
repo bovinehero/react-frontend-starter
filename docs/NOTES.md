@@ -9,6 +9,13 @@ then in the local dir:
 npx create-react-app . --use-npm
 ```
 
+
+React bootstrap
+
+``` sh
+npm install react-bootstrap
+```
+
 ## API Endpoints
 
 | Methods \ Resources  | Profiles<br>(name, content) | Posts<br>(image, title, image_filter, content) | Comments<br>(comment)  | Likes<br>(id)    | Followers<br>(id)  | Custom 1<br>() | Custom 2<br>() |
