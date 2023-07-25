@@ -1,33 +1,12 @@
 ## Node .nvenv Setup
 
-I used nodeenv to manage the local node virtual env.
+
+Installed the latest LTS version of Node (18.17.0) https://nodejs.org/en/download
+
+then in the local dir:
 
 ``` sh
-pip3 install nodeenv
-```
-
-To see which envs are available run:
-
-``` sh
-nodeenv --list
-```
-
-We will create a node 18.16.0 LTS env with mpn version 8.0.0:
-
-``` sh
-nodeenv .nvenv --node=18.16.0 --npm=8.0.0 --with-npm
-```
-
-The node env can be activated:
-
-``` sh
-source .nvenv/bin/activate
-```
-
-and stopped with 
-
-``` sh
-deactivate_node
+npx create-react-app . --use-npm
 ```
 
 ## API Endpoints
