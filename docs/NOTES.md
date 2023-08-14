@@ -16,6 +16,12 @@ React bootstrap
 npm install react-bootstrap
 ```
 
+Routes
+
+``` sh
+npm install react-router-dom
+```
+
 ## API Endpoints
 
 | Methods \ Resources  | Profiles<br>(name, content) | Posts<br>(image, title, image_filter, content) | Comments<br>(comment)  | Likes<br>(id)    | Followers<br>(id)  | Custom 1<br>() | Custom 2<br>() |
