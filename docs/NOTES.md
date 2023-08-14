@@ -174,3 +174,6 @@ const MarkComponent = ({ value, language }) => {
 ```
 
 https://www.positronx.io/how-to-create-live-markdown-editor-in-react-js/
+
+
+Styles are funky with Nav Routes... check these after change to component page styles.
