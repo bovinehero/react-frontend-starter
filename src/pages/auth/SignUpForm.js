@@ -1,45 +1,50 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 import styles from "../../styles/SignInUpForm.module.css";
 import btnStyles from "../../styles/Button.module.css";
 import appStyles from "../../App.module.css";
 
-import { Form, Button, Image, Col, Row, Container, Alert } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+import Image from "react-bootstrap/Image";
+import Col from "react-bootstrap/Col";
+import Row from "react-bootstrap/Row";
+import Container from "react-bootstrap/Container";
+import Alert from "react-bootstrap/Alert";
+
 import axios from "axios";
+import { useRedirect } from "../../hooks/useRedirect";
 
 const SignUpForm = () => {
+    useRedirect("loggedIn");
     const [signUpData, setSignUpData] = useState({
-        username: '',
-        password1: '',
-        password2: '',
+      username: "",
+      password1: "",
+      password2: "",
     });
     const { username, password1, password2 } = signUpData;
-
-    const history = useNavigate();
-
+  
     const [errors, setErrors] = useState({});
+  
+    const history = useNavigate();
 
     const handleChange = (event) => {
         setSignUpData({
-            // load the initial data set
-            ...signUpData,
-            // creates KV pair for the event, tracks against the name of the and attaches the new value that has changed
-            // this allows reuse - so we add to each form component
-            [event.target.name]: event.target.value,
+          ...signUpData,
+          [event.target.name]: event.target.value,
         });
-    };
-
-    const handleSubmit = async (event) => {
+      };
+    
+      const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post('dj-rest-auth/registration/', signUpData)
-            history.push("/signin")
-        } catch(err){
-            // ? siginifies conditional chaining, so if not available don't throw an error
-            setErrors(err.respomse?.data)
+          await axios.post("/dj-rest-auth/registration/", signUpData);
+          history.push("/signin");
+        } catch (err) {
+          setErrors(err.response?.data);
         }
-    }
+      };
 
   return (
     <Row className={styles.Row}>
@@ -49,7 +54,7 @@ const SignUpForm = () => {
 
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="username">
-                <Form.Label className="d-none">Username</Form.Label>
+                <Form.Label className="d-none">username</Form.Label>
                 <Form.Control 
                     className={styles.Input}
                     type="text" 
@@ -76,6 +81,11 @@ const SignUpForm = () => {
                     onChange={handleChange}
                 />
             </Form.Group>
+            {errors.password1?.map((message, idx) => (
+              <Alert key={idx} variant="warning">
+                {message}
+              </Alert>
+            ))}
 
             <Form.Group className="mb-3" controlId="password2">
                 <Form.Label className="d-none">Confirm Password</Form.Label>
@@ -88,7 +98,11 @@ const SignUpForm = () => {
                     onChange={handleChange}
                 />
             </Form.Group>
-            
+            {errors.password2?.map((message, idx) => (
+              <Alert key={idx} variant="warning">
+                {message}
+              </Alert>
+            ))}
 
             <Button type="submit" className={`${btnStyles.Button} ${btnStyles.Wide} ${btnStyles.Bright}`}>
                 Sign Up
